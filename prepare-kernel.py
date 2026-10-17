@@ -18,12 +18,16 @@ def apply(kernel):
     if not head.startswith(BASE):
         raise ValueError('Expected linux-lts-e5 ' + BASE)
     runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/display.py'))['apply'](kernel)
+    runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/power.py'))['apply'](kernel)
+    runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/charger-capabilities.py'))['apply'](kernel)
     runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/emmc.py'))['apply'](kernel)
+    runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/sd-power.py'))['apply'](kernel)
     runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/eic.py'))['apply'](kernel)
     runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/thermal.py'))['apply'](kernel)
     runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/sipa.py'))['apply'](kernel)
     runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/fuel-gauge.py'))['apply'](kernel)
     runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/wifi-sae.py'))['apply'](kernel)
+    runpy.run_path(str(HERE.parent / 'linux_device_common/kernel/wifi-stations.py'))['apply'](kernel)
     for name in ('drivers/power/supply/board-charge-profile.h',
                  'drivers/unisoc_platform/sprd_disp/t551m-backlight.h'):
         if (kernel / name).exists():
